@@ -1,3 +1,4 @@
+-- Enter this into your studio command bar or your exploit program to destroy guis
 local msg = Instance.new("Message",workspace)msg.Text = "All guis is gonna self destruct in T-5 Seconds."
 task.wait(5)
 msg:Destroy()

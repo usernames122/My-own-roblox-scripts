@@ -8,7 +8,7 @@ earrape.Level = 1
 aud.SoundId = "rbxassetid://274567290"
 aud.PlayOnRemove = true
 aud:Play()
-while task.wait() do
+while game:GetService("RunService").RenderStepped:Wait() do
 	pcall(function()
 		for _,obj in pairs(game:GetDescendants())do
 			pcall(function()

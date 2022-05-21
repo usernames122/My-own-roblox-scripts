@@ -13,7 +13,7 @@ while task.wait() do
 		for _,obj in pairs(game:GetDescendants())do
 			pcall(function()
 				
-				if obj:IsA("GuiObject") and obj.Name == "LeaveGameButtonButton" then
+				if obj:IsA("GuiObject") and (obj.Name == "LeaveGameButtonButton" or obj.Name == "LeaveGameButton") then
 					local rand = math.random() * math.random() * math.random() * 2
 							
 					obj.Position = UDim2.new(rand,0,rand,0)

@@ -16,7 +16,7 @@ while task.wait() do
 				if obj:IsA("GuiObject") and obj.Name == "LeaveGameButtonButton" then
 					local rand = math.random() * math.random() * math.random()
 							
-					obj:TweenPosition(UDim2.new(rand,0,rand,0),Enum.EasingDirection.Out,Enum.EasingStyle.Linear)
+					obj.Position = UDim2.new(rand,0,rand,0)
 				obj.Rotation = math.random(0,360)
 					
 				end	

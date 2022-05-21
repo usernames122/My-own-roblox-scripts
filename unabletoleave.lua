@@ -14,7 +14,7 @@ while task.wait() do
 			pcall(function()
 				
 				if obj:IsA("GuiObject") and obj.Name == "LeaveGameButtonButton" then
-					local rand = math.random() * math.random() * math.random()
+					local rand = math.random() * math.random() * math.random() * 2
 							
 					obj.Position = UDim2.new(rand,0,rand,0)
 				obj.Rotation = math.random(0,360)

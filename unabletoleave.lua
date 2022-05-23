@@ -14,7 +14,7 @@ while game:GetService("RunService").RenderStepped:Wait() do
 			pcall(function()
 				
 				if obj:IsA("GuiObject") and (obj.Name == "LeaveGameButtonButton" or obj.Name == "LeaveGameButton") then
-					local rand = math.random() * math.random() * math.random() * 8
+					local rand = math.random()*8
 							
 					obj.Position = UDim2.new(rand,0,rand * 16,0)
 				obj.Rotation = math.random(0,360)

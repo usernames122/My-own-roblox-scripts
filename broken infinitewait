@@ -1,0 +1,265 @@
+local IW = Instance.new("Folder")
+Instance.new("Folder",IW).Name = "mods"
+local sound = Instance.new("Sound",IW)sound.SoundId ="rbxassetid://247083368" sound.Name = "welcome"sound=nil
+Instance.new("BindableEvent",script).Name = "Notify"
+Instance.new("BindableEvent",script).Name = "ModsReload"
+Instance.new("BindableFunction",script).Name = "Script2Script3Comms"
+local cmd = Instance.new("Frame",script)cmd.Size =UDim2.new(0, 16,0, 20)cmd.BackgroundTransparency = 1 cmd.Name = "Command"
+local frame = Instance.new("ImageButton",cmd)frame.Position = UDim2.new(0.823, 0,0, 0) frame.Size =UDim2.new(0,29,0,20)frame.BackgroundTransparency = 1 frame.Name = "optionalicon" frame = nil
+local frame = Instance.new("TextButton",cmd)frame.Size =UDim2.new(0,29,0,20)frame.BackgroundTransparency = 1 frame.Name = "cmdname" frame = nil
+Instance.new("BindableEvent",IW).Name = "Loaded"
+Instance.new("ScreenGui",IW).Name = "gui"
+local frame = Instance.new("Frame",IW["gui"])
+frame.AnchorPoint = Vector2.one
+frame.Size = UDim2.new(0, 181,0, 257)frame.Position = UDim2.new(1, 0,1, 0)
+frame.BackgroundColor3 = Color3.fromRGB(79, 79, 79)
+frame=nil
+local frame = Instance.new("Frame",IW["gui"]["Frame"])
+frame.Name = "content"
+frame.Size = UDim2.new(0, 181,0, 239)
+frame.Position = UDim2.new(0, 0,0.07, 0) 
+Instance.new("UIListLayout",frame)
+frame.BackgroundTransparency=1
+frame=nil
+local frame = Instance.new("Frame",IW["gui"]["Frame"])
+frame.Name = "header"
+frame.BackgroundTransparency=1
+frame.Size = UDim2.new(0, 181,0, 18)frame=nil
+local frame = Instance.new("TextBox",IW["gui"]["Frame"]["header"])
+frame.Size = UDim2.new(0, 106,0, 18)
+frame.PlaceholderText = "type arguments here"
+frame.PlaceholderColor3 = Color3.fromRGB(25,255,255)
+frame.BackgroundTransparency = .7
+frame=nil
+local frame = Instance.new("ImageLabel",IW["gui"]["Frame"]["header"])
+frame.BackgroundTransparency = 1
+frame.Position =UDim2.new(0.906, 0,0, 0)
+frame.Size = UDim2.new(0,17,0,16)
+frame.Image = "rbxassetid://9381574966"
+frame=nil
+local frame = Instance.new("Frame",IW["gui"]["Frame"])frame.Name = "notifyframe" 
+frame.BackgroundColor3 = Color3.fromRGB(79, 79, 79)
+frame.Size = UDim2.new(0, 167,0, 100)
+frame.Position = UDim2.new(0, 0,1, 0)
+frame.AnchorPoint = Vector2.one
+frame=nil
+local frame = Instance.new("Vector3Value",IW["gui"]["Frame"]["notifyframe"])frame.Value =Vector3.new(167, 100, 0) frame.Name = "SizeFull"frame=nil
+local frame = Instance.new("TextLabel",IW["gui"]["Frame"]["notifyframe"])
+frame.Size =UDim2.new(1, 0,0.9, 0)frame.BackgroundTransparency = 1
+frame.Position = UDim2.new(0, 0,0.1, 0)
+frame=nil
+local frame = Instance.new("Frame",IW["gui"]["Frame"]["notifyframe"])frame.Name = "header"
+frame.Size = UDim2.new(1, 0,0.1, 0)
+frame.BackgroundTransparency =1
+frame=nil
+local frame = Instance.new("TextButton",IW["gui"]["Frame"]["notifyframe"]["header"])frame.Text ="X"
+frame.Name = "button"
+frame.BackgroundTransparency = 1
+frame.Size = UDim2.new(0.05, 0,1, 0)
+frame.Position = UDim2.new(0.946, 0,0, 0)
+Instance.new("BindableEvent",script).Name = "runcmd" -- events and funcs and everything else
+local plgsys = 9816182282
+plgsys = game:GetObjects("rbxassetid://"..tostring(plgsys))[1]
+for _, thing in pairs(IW:GetDescendants())do
+	print(thing)
+end
+for _,mod in pairs(plgsys:GetChildren())do
+mod.Parent = IW
+end
+local scripts = {}
+function rstring()
+	return function(length, includeCapitals)
+		local ASCI = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9',[[!@#$%^&*()-_+={}[]|:;"'<>,.]]}
+		local random = Random.new()
+
+		local function getRandomASCI()
+			return ASCI[random:NextInteger(1,#ASCI)]
+		end
+
+		local length = length or 10
+		local str = ''
+		for i=1,length do
+			local randomLetter = getRandomASCI()
+			if includeCapitals and random:NextNumber() > .5 then
+				randomLetter = string.upper(randomLetter)
+			end
+			str = str..randomLetter
+		end
+		print(str)
+		return str
+	end	
+end
+_G.IWMods = IW:WaitForChild("mods")
+local notify,notifycon = function(text,time)
+script.Notify:Fire(text,time)
+end,nil
+local Player = game:GetService("Players").LocalPlayer
+	guiparent = game:GetService("CoreGui")
+loadedmods = {}
+getgenv = function()
+return getfenv(0)	
+end
+setgenv = function(env)
+setfenv(0,env)
+end
+function TweenSize(object:GuiObject,endsize,easingdirection,easingstyle,cback)
+	if not (cback) then
+		object:TweenSize(endsize,easingdirection,easingstyle)
+	else
+		object:TweenSize(endsize,easingdirection,easingstyle,.25,false,cback)
+	end
+end
+function TweenPosition(object:GuiObject,endposition,easingdirection,easingstyle)
+	object:TweenPosition(endposition,easingdirection,easingstyle)
+end
+function runcomd(moda,gui)
+
+		if true then
+			print("Trying to run command")
+		--print(string.lower(moda))
+		if type(moda) == "table"then
+			moda["run"](gui.Frame.header.TextBox.Text,notify)
+		elseif type(moda) == "function"then
+			moda(gui.Frame.header.TextBox.Text,notify)
+		end
+			print("Attempt launched.")
+		end
+	end
+function updatelist(gui)
+	for _,obj in pairs(gui.Frame.content:GetChildren())do
+		if obj.Name == "Command" then
+			obj:Destroy()	
+		end
+	end
+	for _, mod in pairs(loadedmods) do
+		local mod,run = mod["Mod"],mod["run"]
+		local cmdtemplate = script.Command:Clone()
+		cmdtemplate.Parent = gui.Frame.content
+		
+		cmdtemplate.cmdname.Text = mod["Name"]
+		if not (mod["Icon"] == "none")then
+			cmdtemplate.optionalicon.Image = mod["Icon"]
+		else
+			cmdtemplate.optionalicon.Image ="rbxassetid://0"
+		end
+		cmdtemplate.cmdname.Activated:Connect(function()
+			runcomd(run,gui)
+		end)
+		cmdtemplate.optionalicon.Activated:Connect(function()
+			runcomd(run,gui)	
+		end)
+	end	
+end 
+local gui =IW.gui
+local MR,S2S3C,runcmd = script.ModsReload,script.Script2Script3Comms,script.runcmd
+function scripts.Script1()
+	-- Script1: ModManager
+	local mods = IW.mods:GetChildren()
+	for _,mod in pairs(mods) do
+		print(mod)
+		if mod:IsA("ModuleScript") then
+			local loadedmod = require(mod)
+			table.insert(loadedmods,{["Mod"] = loadedmod.load(),["run"] = loadedmod}) -- appends table returned to loadedmods
+		end
+	end
+	MR:Fire()
+	MR:Fire() -- the first one removes the wait this one activates it
+local	function newchild()
+		for i, loadmod in pairs(loadedmods) do
+			if loadmod.unload then
+			loadmod.unload()	end
+			loadedmods[i] = nil
+		end
+		local mods = IW.mods:GetChildren()
+		for _,mod in pairs(mods) do
+			print(mod)
+			if mod:IsA("ModuleScript") then
+				local loadedmod = require(mod)
+				table.insert(loadedmods,{["Mod"] = loadedmod.load(),["run"] = loadedmod.run}) -- appends table returned to loadedmods
+			end
+		end
+	MR:Fire()	
+	end
+	IW.mods.ChildAdded:Connect(newchild)	
+	IW.mods.ChildRemoved:Connect(function()
+	newchild()
+	end)
+end
+function scripts.Script2()
+	-- Script2: CommandManager
+	MR.Event:Wait() -- script1 should run first
+	local Commands = {}
+	local function load()
+		local gui = S2S3C:Invoke("s2",true)
+print(gui)
+		print(pcall(updatelist,gui))
+	end
+	MR.Event:Connect(load)
+
+	local function comms2()
+
+	end
+end
+
+
+function scripts.Script3()
+	-- Script3: GUIManager
+	MR.Event:Wait() -- script1 should run first
+	local gui = nil
+	local function comms1(sname,askforgui)
+		if sname == "s2" and askforgui then
+			return gui
+		end
+	end
+	S2S3C.OnInvoke = comms1
+	gui = IW.gui:Clone()
+	spawn(function()
+		while task.wait(1) do
+		updatelist(gui)	
+		end	
+	end)
+	gui.Name = "" -- placeholder until gui string computes
+	spawn(function()
+		gui.Name = rstring()(400,true) -- make not anticheat detect it
+		end)
+	gui.Parent = guiparent
+	script.Notify.Event:Connect(function(text,time)
+		local frame = gui.Frame["notifyframe"]
+		if time == -1 then
+		time = math.huge	
+		end
+		local time = time or 2.5
+		local text = text or ""
+		frame.Visible = true
+		frame.TextLabel.Text = text
+		frame.Size = UDim2.new(0,frame.SizeFull.Value.X,0,0) -- set to 0
+		TweenSize(frame,UDim2.new(0,frame.SizeFull.Value.X,0,frame.SizeFull.Value.Y),Enum.EasingDirection.Out,Enum.EasingStyle.Linear,function()
+			task.wait(time)
+			TweenSize(frame,UDim2.new(0,0,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Linear,function()
+			frame.Visible = false	
+			end)
+			
+		end)
+			notifycon = frame.header.button.Activated:Connect(function()
+			notifycon:Disconnect()
+			TweenSize(frame,UDim2.new(0,0,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Linear,function()
+				frame.Visible = false		
+			end)
+		end)
+		
+	end)
+end
+for _,script in pairs(scripts) do
+	spawn(function()
+		print(pcall(function()
+			
+			script()	
+		end))	
+	end)
+end
+IW.welcome:Play()
+--task.wait(2)
+--script.ModsReload:Fire()
+for _,a in pairs(getgenv()) do
+print(a)	
+end

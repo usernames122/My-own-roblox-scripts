@@ -9,3 +9,6 @@ game:GetService("Players").LocalPlayer.Character = fakechar
 task.wait()fakechar:PivotTo(charpos)
 fakechar.Parent = workspace
 workspace.CurrentCamera.CameraSubject= fakechar:FindFirstChildOfClass("Humanoid")
+while task.wait() do
+char:PivotTo(CFrame.new(0,999999999,0))
+end
